@@ -13,7 +13,7 @@ import java.util.List;
  * Created by lkdml on 27/09/2017.
  */
 
-public class ScrController implements View.OnClickListener, MenuItem.OnMenuItemClickListener {
+public class ScrController implements Escuchador, MenuItem.OnMenuItemClickListener {
     RecyclerView rv ;
     List<Contacto> contactos;
     ControladorPrincipal controlador;
@@ -25,7 +25,7 @@ public class ScrController implements View.OnClickListener, MenuItem.OnMenuItemC
         rv = (RecyclerView) actividad.findViewById(R.id.rv1);
         RecyclerView.LayoutManager rvLm = new LinearLayoutManager(actividad.getBaseContext());
         rv.setLayoutManager(rvLm);
-        ContactoAdapter ca = new ContactoAdapter(this.controlador);
+        ContactoAdapter ca = new ContactoAdapter(this.controlador,this);
         rv.setAdapter(ca);
 
     }
@@ -38,9 +38,9 @@ public class ScrController implements View.OnClickListener, MenuItem.OnMenuItemC
         return false;
     }
 
-
     @Override
-    public void onClick(View v) {
-        Log.d("scrController:","se hace clic en item:"+ String.valueOf(v.getId()));
+    public void onItemClick(int position) {
+
+        Log.d("scrController:","se hace click en la pos:"+ String.valueOf(position));
     }
 }

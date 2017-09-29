@@ -13,9 +13,11 @@ import java.util.List;
  */
 
 public class ContactoAdapter extends RecyclerView.Adapter<ConcactoVH> {
-    public ContactoAdapter(ControladorPrincipal controlador) {
+    Escuchador listener;
+    public ContactoAdapter(ControladorPrincipal controlador,Escuchador listener) {
         this.contactos = controlador.getContactos();
         this.controlador = controlador;
+        this.listener = listener;
     }
 
     List<Contacto> contactos;
@@ -35,7 +37,8 @@ public class ContactoAdapter extends RecyclerView.Adapter<ConcactoVH> {
     @Override
     public ConcactoVH onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.contacto_holder,parent,false);
-        ConcactoVH vh = new ConcactoVH(v);
+        ConcactoVH vh = new ConcactoVH(v,this.listener);
+
         return vh;
     }
 
@@ -46,8 +49,7 @@ public class ContactoAdapter extends RecyclerView.Adapter<ConcactoVH> {
         holder.apellido.setText(c.getApellido());
         holder.email.setText(c.getEmail());
         holder.telefono.setText(c.getTelefono());
-        holder.posision = position;
-        holder.itemView.setOnClickListener(this.controlador.getScr());
+        //holder.itemView.setOnClickListener(listener);
     }
 
     @Override
